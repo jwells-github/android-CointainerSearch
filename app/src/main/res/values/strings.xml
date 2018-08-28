@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ContainerSearch</string>
+    <string name="sugested_services">Sugested Services</string>
 </resources>
