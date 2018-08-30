@@ -8,9 +8,11 @@ public class ContainerNumber {
         mContainerNumber = containerNumber;
     }
 
+    public String getContainerNumber() {
+        return mContainerNumber;
+    }
 
     public Boolean isValid(){
-        System.out.println(mContainerNumber);
         String[] containerNumber = mContainerNumber.split("(?!^)");
 
         if(containerNumber.length != 11){
@@ -22,6 +24,7 @@ public class ContainerNumber {
                 return false;
             }
         }
+
         for(int i = 4; i <= 9; i++){
             if(!Character.isDigit(containerNumber[i].charAt(0))){
                 return false;
@@ -30,7 +33,6 @@ public class ContainerNumber {
 
         int finalDigit = sumOfNumbers(containerNumber) % 11;
 
-        System.out.println(containerNumber[10] + " " + String.valueOf(finalDigit));
         if(containerNumber[10].equals(String.valueOf(finalDigit))){
             return true;
         }
@@ -59,5 +61,19 @@ public class ContainerNumber {
             value += value / 11;
             return value;
         }
+    }
+
+
+    public String SuggestedService(){
+        String ownerCode = mContainerNumber.substring(0,3).toUpperCase();
+        switch (ownerCode){
+            case "HDM":
+
+                break;
+
+            default:
+                return "NA";
+        }
+        return "";
     }
 }
