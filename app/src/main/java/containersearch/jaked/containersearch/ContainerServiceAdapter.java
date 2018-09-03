@@ -2,6 +2,10 @@ package containersearch.jaked.containersearch;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +17,7 @@ import java.util.ArrayList;
 public class ContainerServiceAdapter extends ArrayAdapter<String> {
 
 
+    private static final String WEB_ADDRESS = "CONTAINER_NUMBER";
     public ArrayList<String> keyArray ;
     public ArrayList<String> valueArray ;
 
@@ -24,7 +29,7 @@ public class ContainerServiceAdapter extends ArrayAdapter<String> {
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent){
+    public View getView(final int position, View convertView, final ViewGroup parent){
 
 
         if (convertView == null) {
@@ -39,6 +44,15 @@ public class ContainerServiceAdapter extends ArrayAdapter<String> {
             @Override
             public void onClick(View view) {
                 System.out.println("Clicked " + position + " and " + keyArray.get(position));
+
+                Fragment fragment = new WebTrackingFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString(WEB_ADDRESS, valueArray.get(position));
+                fragment.setArguments(bundle);
+                FragmentTransaction transaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, fragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
 
