@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Switch;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,6 +21,7 @@ public class SearchChoiceFragment extends Fragment {
 
 
     public TreeMap<String, String> serviceMap;
+    public TreeMap<String, String> suggestedMap;
 
     private static final String CONTAINER_NUMBER = "CONTAINER_NUMBER";
 
@@ -29,11 +31,23 @@ public class SearchChoiceFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_search_choice, container, false);
         mContainerNumber = new ContainerNumber(getArguments().getString(CONTAINER_NUMBER));
         setTreeMap();
-        ArrayList<String> valueArray = new ArrayList<>(serviceMap.values());
+
+        ArrayList<String> valueArray = new ArrayList<String>(serviceMap.values());
         ArrayList<String> keyArray = new ArrayList<String>(serviceMap.keySet());
+
+        suggestedServices();
+        ArrayList<String> suggestedValueArray = new ArrayList<String>(suggestedMap.values());
+        ArrayList<String> suggestedKeyArray = new ArrayList<String>(suggestedMap.keySet());
+        final ContainerServiceAdapter suggestedServiceAdapter = new ContainerServiceAdapter(getContext(), suggestedKeyArray, suggestedValueArray);
+        ListView listViewSuggested = v.findViewById(R.id.lvSuggested);
+        listViewSuggested.setAdapter(suggestedServiceAdapter);
+
+
         final ContainerServiceAdapter adapter = new ContainerServiceAdapter(getContext(), keyArray, valueArray);
-        ListView listView = v.findViewById(R.id.lvAll);
-        listView.setAdapter(adapter);
+        ListView listViewAllServices = v.findViewById(R.id.lvAll);
+        listViewAllServices.setAdapter(adapter);
+
+
 
 
         return v;
@@ -170,6 +184,19 @@ public class SearchChoiceFragment extends Fragment {
             put("Zim World Freight","");
 
         }};
+    }
+
+    private void suggestedServices(){
+        suggestedMap = new TreeMap<String, String>();
+        String containerNumber = mContainerNumber.getContainerNumber();
+        String serviceName;
+        switch(containerNumber.substring(0,3)){
+            case "HDM":
+                serviceName = "Hyundai (HMM)";
+                suggestedMap.put(serviceName,serviceMap.get(serviceName));
+
+
+        }
     }
 
 

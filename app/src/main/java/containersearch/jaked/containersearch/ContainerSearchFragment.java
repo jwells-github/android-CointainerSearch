@@ -1,7 +1,5 @@
 package containersearch.jaked.containersearch;
 
-import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -31,7 +29,7 @@ public class ContainerSearchFragment extends Fragment {
 
                 ContainerNumber containerNumber = new ContainerNumber(etContainerNumber.getText().toString());
                 if(containerNumber.isValid()){
-                    DisplaySearchOptions();
+                    DisplaySearchOptions(containerNumber.getContainerNumber());
                 }
 
             }
@@ -40,10 +38,10 @@ public class ContainerSearchFragment extends Fragment {
         return v;
     }
 
-    private void DisplaySearchOptions(){
+    private void DisplaySearchOptions(String containerNumber){
         Fragment fragment = new SearchChoiceFragment();
         Bundle bundle = new Bundle();
-        bundle.putString(CONTAINER_NUMBER,"containernumber");
+        bundle.putString(CONTAINER_NUMBER, containerNumber);
         fragment.setArguments(bundle);
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, fragment);
