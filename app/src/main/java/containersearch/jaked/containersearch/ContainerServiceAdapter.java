@@ -24,7 +24,7 @@ public class ContainerServiceAdapter extends ArrayAdapter<String> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent){
+    public View getView(final int position, View convertView, ViewGroup parent){
 
 
         if (convertView == null) {
@@ -33,7 +33,14 @@ public class ContainerServiceAdapter extends ArrayAdapter<String> {
 
         TextView tvName = (TextView) convertView.findViewById(R.id.tvName);
 
-        tvName.setText(valueArray.get(position));
+        tvName.setText(keyArray.get(position));
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("Clicked " + position + " and " + keyArray.get(position));
+            }
+        });
 
         return convertView;
 
