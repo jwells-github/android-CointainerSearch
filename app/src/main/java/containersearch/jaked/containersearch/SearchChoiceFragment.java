@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ListView;
 import android.widget.Switch;
 
@@ -28,7 +29,7 @@ public class SearchChoiceFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_search_choice, container, false);
+        View v = inflater.inflate(R.layout.as, container, false);
         mContainerNumber = new ContainerNumber(getArguments().getString(CONTAINER_NUMBER));
         setTreeMap();
 
@@ -36,6 +37,9 @@ public class SearchChoiceFragment extends Fragment {
         ArrayList<String> keyArray = new ArrayList<String>(serviceMap.keySet());
 
         suggestedServices();
+
+        //WebView webView = v.findViewById(R.id.suggestedWebview);
+        //webView.loadUrl(suggestedMap.get(suggestedMap.firstKey()));
         ArrayList<String> suggestedValueArray = new ArrayList<String>(suggestedMap.values());
         ArrayList<String> suggestedKeyArray = new ArrayList<String>(suggestedMap.keySet());
         final ContainerServiceAdapter suggestedServiceAdapter = new ContainerServiceAdapter(getContext(), suggestedKeyArray, suggestedValueArray);
