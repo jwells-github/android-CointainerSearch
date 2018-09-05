@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class ContainerServiceAdapter extends ArrayAdapter<String> {
 
 
-    private static final String WEB_ADDRESS = "CONTAINER_NUMBER";
+    private static final String WEB_ADDRESS = "WEB_ADDRESS";
     public ArrayList<String> keyArray ;
     public ArrayList<String> valueArray ;
 
@@ -48,12 +48,15 @@ public class ContainerServiceAdapter extends ArrayAdapter<String> {
             public void onClick(View view) {
                 System.out.println("Clicked " + position + " and " + keyArray.get(position));
 
+/*
                 Uri webpage = Uri.parse(valueArray.get(position));
                 Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
                 if(intent.resolveActivity(getContext().getPackageManager()) != null){
                     getContext().startActivity(intent);
                 }
-/*
+*/
+
+                System.out.println("LOADING WEB FRAGMENT");
                 Fragment fragment = new WebTrackingFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString(WEB_ADDRESS, valueArray.get(position));
@@ -62,7 +65,7 @@ public class ContainerServiceAdapter extends ArrayAdapter<String> {
                 transaction.replace(R.id.fragment_container, fragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
-                */
+
             }
         });
 

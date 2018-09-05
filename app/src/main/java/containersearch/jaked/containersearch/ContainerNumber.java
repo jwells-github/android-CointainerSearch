@@ -58,22 +58,8 @@ public class ContainerNumber {
         else {
             c = Character.toLowerCase(c);
             int value = ((int) c ) - 87;
-            value += value / 11;
+            value += (value + 1) / 11;
             return value;
         }
-    }
-
-
-    public String SuggestedService(){
-        String ownerCode = mContainerNumber.substring(0,3).toUpperCase();
-        switch (ownerCode){
-            case "HDM":
-
-                break;
-
-            default:
-                return "NA";
-        }
-        return "";
     }
 }

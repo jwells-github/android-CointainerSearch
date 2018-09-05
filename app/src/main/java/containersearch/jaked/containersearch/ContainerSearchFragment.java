@@ -31,6 +31,9 @@ public class ContainerSearchFragment extends Fragment {
                 if(containerNumber.isValid()){
                     DisplaySearchOptions(containerNumber.getContainerNumber());
                 }
+                else{
+                    System.out.println("INVALD CONTAINER NUMBER");
+                }
 
             }
         });
@@ -47,5 +50,6 @@ public class ContainerSearchFragment extends Fragment {
         transaction.replace(R.id.fragment_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+
     }
 }

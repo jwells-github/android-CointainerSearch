@@ -58,6 +58,8 @@ public class SearchChoiceFragment extends Fragment {
     }
 
     private void setTreeMap(){
+
+        final String containerNumber = mContainerNumber.getContainerNumber();
         serviceMap = new TreeMap<String, String>() {{
             put("ACL", "");
             put("Alianca", "");
@@ -105,7 +107,7 @@ public class SearchChoiceFragment extends Fragment {
             put("Heung-A Shipping","");
             put("Hyundai (HMM)", "https://www.hmm21.com/cms/business/ebiz/trackTrace/trackTrace/index.jsp?numbers=" +
                     "&numbers=&numbers=&numbers=&numbers=&numbers=&numbers=&numbers=&numbers=&numbers=&numbers=&numbers=&numbers=" +
-                    "&is_quick=Y&quick_params=&type=2&number=" + mContainerNumber.getContainerNumber() + "&submit.x=21&submit.y=10");
+                    "&is_quick=Y&quick_params=&type=2&number=" + containerNumber + "&submit.x=21&submit.y=10");
             put("Italia Marittima","");
             put("K-line","");
             put("Kambara Kisen","");
@@ -123,7 +125,7 @@ public class SearchChoiceFragment extends Fragment {
             put("Matson","");
             put("Maxicon Container Line","");
             put("MCC Transport","");
-            put("Mediterranean Shipping","");
+            put("Mediterranean Shipping (MSC)","https://www.msc.com/track-a-shipment");
             put("Meratus Line","");
             put("Minsheng Ocean Shipping","");
             put("MOL now ONE","");
@@ -134,7 +136,7 @@ public class SearchChoiceFragment extends Fragment {
             put("Ocean Axis","");
             put("Ocean World Lines","");
             put("ONE","");
-            put("OOCL","");
+            put("OOCL","http://www.oocl.com/Pages/ExpressLink.aspx?eltype=ct&bl_no=&cont_no="+ containerNumber +"&booking_no=");
             put("OPDR","");
             put("Pacific Direct Line","");
             put("Pan Asia Line","");
@@ -192,12 +194,29 @@ public class SearchChoiceFragment extends Fragment {
 
     private void suggestedServices(){
         suggestedMap = new TreeMap<String, String>();
-        String containerNumber = mContainerNumber.getContainerNumber();
+        String containerNumber = mContainerNumber.getContainerNumber().toUpperCase();
         String serviceName;
+        System.out.println("containernumber " + containerNumber);
         switch(containerNumber.substring(0,3)){
             case "HDM":
                 serviceName = "Hyundai (HMM)";
                 suggestedMap.put(serviceName,serviceMap.get(serviceName));
+                break;
+            case "OOL":
+                serviceName = "OOCL";
+                suggestedMap.put(serviceName, serviceMap.get(serviceName));
+                break;
+            case "MSC":
+            case "MSD":
+            case "MSM":
+            case "MSP":
+            case "MSZ":
+            case "GTI":
+            case "MED":
+            case "MSY":
+                serviceName = "Mediterranean Shipping (MSC)";
+                suggestedMap.put(serviceName, serviceMap.get(serviceName));
+                break;
 
 
         }
