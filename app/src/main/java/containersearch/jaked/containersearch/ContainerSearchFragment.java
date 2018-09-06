@@ -1,5 +1,6 @@
 package containersearch.jaked.containersearch;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -42,14 +43,10 @@ public class ContainerSearchFragment extends Fragment {
     }
 
     private void DisplaySearchOptions(String containerNumber){
-        Fragment fragment = new SearchChoiceFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString(CONTAINER_NUMBER, containerNumber);
-        fragment.setArguments(bundle);
-        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+
+        Intent intent = new Intent(getActivity(), SearchChoiceActivity.class);
+        intent.putExtra(CONTAINER_NUMBER, containerNumber);
+        startActivity(intent);
 
     }
 }

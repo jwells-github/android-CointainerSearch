@@ -6,13 +6,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.ListView;
-import android.widget.Switch;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.TreeMap;
 
 public class SearchChoiceFragment extends Fragment {
@@ -65,7 +61,7 @@ public class SearchChoiceFragment extends Fragment {
             put("Alianca", "");
             put("Allalouf","");
             put("ANL", "");
-            put("APL", "");
+            put("APL", "https://homeport.apl.com/gentrack/trackingMain.do?trackInput01="+containerNumber);
             put("Arkas Line", "");
             put("Avana Logistek", "");
             put("Beacon Intermodal", "");
@@ -76,10 +72,10 @@ public class SearchChoiceFragment extends Fragment {
             put("Canadian National Railway", "");
             put("Canadian Pacific Railway", "");
             put("CARU containers", "");
-            put("CMA CGM", "");
+            put("CMA CGM", "https://www.cma-cgm.com/ebusiness/tracking/search?SearchBy=Container&Reference="+containerNumber);
             put("CNC Line", "");
             put("CONCOR", "");
-            put("Cosco Shipping Lines" , "");
+            put("Cosco Shipping Lines" , "http://elines.coscoshipping.com/ebusiness/cargoTracking?trackingType=CONTAINER&number="+containerNumber);
             put("Crowley", "");
             put("CULlines", "");
             put("DAL" , "");
@@ -117,7 +113,7 @@ public class SearchChoiceFragment extends Fragment {
             put("Leschaco","");
             put("Linea Messina","");
             put("MACS","");
-            put("Maersk Line","");
+            put("Maersk Line","https://www.maersk.com/tracking/#tracking/"+containerNumber);
             put("Maldives Ports","");
             put("Marfret","");
             put("Mariana Express Lines","");
@@ -185,7 +181,7 @@ public class SearchChoiceFragment extends Fragment {
             put("Wan Hai Lines","");
             put("White Line","");
             put("WorldWide Alliance","");
-            put("Yang Ming","");
+            put("Yang Ming","https://www.yangming.com/e-service/track_trace/mul_ctnr.aspx?str="+ containerNumber +",&rdolType=CT");
             put("ZIM","");
             put("Zim World Freight","");
 
@@ -202,6 +198,7 @@ public class SearchChoiceFragment extends Fragment {
                 serviceName = "Hyundai (HMM)";
                 suggestedMap.put(serviceName,serviceMap.get(serviceName));
                 break;
+            case "OOc":
             case "OOL":
                 serviceName = "OOCL";
                 suggestedMap.put(serviceName, serviceMap.get(serviceName));
@@ -217,7 +214,31 @@ public class SearchChoiceFragment extends Fragment {
                 serviceName = "Mediterranean Shipping (MSC)";
                 suggestedMap.put(serviceName, serviceMap.get(serviceName));
                 break;
+            case "MCI":
+                serviceName = "Maersk Line";
+                suggestedMap.put(serviceName, serviceMap.get(serviceName));
+                break;
+            case "STM":
+                serviceName = "CMA CGM";
+                suggestedMap.put(serviceName, serviceMap.get(serviceName));
+                break;
 
+            case "APD":
+                serviceName = "APL";
+                suggestedMap.put(serviceName, serviceMap.get(serviceName));
+                break;
+            case "CCL":
+            case "CSL":
+            case "CSN":
+                serviceName = "Cosco Shipping Lines";
+                suggestedMap.put(serviceName, serviceMap.get(serviceName));
+                break;
+            case "YML":
+            case "YMM":
+            case "KMS":
+                serviceName = "Yang Ming";
+                suggestedMap.put(serviceName, serviceMap.get(serviceName));
+                break;
 
         }
     }

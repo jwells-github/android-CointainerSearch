@@ -14,14 +14,18 @@ public class WebTrackingFragment extends Fragment {
 
 
     private static final String WEB_ADDRESS = "WEB_ADDRESS";
+    private static final String SERVICE_NAME = "SERVICE_NAME";
+    private static final String CONTAINER_NUMBER = "CONTAINER_NUMBER";
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_webview, container, false);
         String mURL = getArguments().getString(WEB_ADDRESS);
-
+        String mServiceName = getArguments().getString(SERVICE_NAME);
+        String mContainerNumber = getArguments().getString(CONTAINER_NUMBER);
         WebView webView = v.findViewById(R.id.webView);
+        final String js = determineService(mContainerNumber, mServiceName);
         webView.setWebViewClient(new WebViewClient(){
 
             boolean b = true;
@@ -29,11 +33,6 @@ public class WebTrackingFragment extends Fragment {
             public void onPageFinished(WebView view, String url) {
 
                 super.onPageFinished(view, url);
-                String containerNumber = "MSCU3651213";
-                String js = "javascript:var uselessvar =document.getElementById('ctl00_ctl00_plcMain_plcMain_TrackSearch_txtBolSearch_TextField').value='"+containerNumber+"';"
-                            + "javascript:var uselessvar =document.getElementById('ctl00_ctl00_plcMain_plcMain_TrackSearch_hlkSearch').click();" ;
-
-
                 if (b){
                     b = false;
                     view.evaluateJavascript(js, new ValueCallback<String>() {
@@ -50,21 +49,27 @@ public class WebTrackingFragment extends Fragment {
             }
         });
         webView.getSettings().setJavaScriptEnabled(true);
-
+        // For zoom
         webView.getSettings().setBuiltInZoomControls(true);
         webView.getSettings().setDisplayZoomControls(false);
-
         webView.getSettings().setLoadWithOverviewMode(true);
         webView.getSettings().setUseWideViewPort(true);
-
         // for javascript
         webView.getSettings().setDomStorageEnabled(true);
-
         webView.loadUrl(mURL);
 
-
-        System.out.println("url loaded");
-
         return v;
+    }
+
+    private String determineService(String containerNumber, String serviceName){
+        String js = "";
+        switch (serviceName){
+            case "Mediterranean Shipping (MSC)":
+                js  = "document.getElementById('ctl00_ctl00_plcMain_plcMain_TrackSearch_txtBolSearch_TextField').value='"+containerNumber+"';"
+                    + "document.getElementById('ctl00_ctl00_plcMain_plcMain_TrackSearch_hlkSearch').click();";
+                break;
+
+        }
+        return js;
     }
 }

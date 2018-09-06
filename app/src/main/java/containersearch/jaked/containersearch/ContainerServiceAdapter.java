@@ -20,9 +20,16 @@ import java.util.ArrayList;
 public class ContainerServiceAdapter extends ArrayAdapter<String> {
 
 
-    private static final String WEB_ADDRESS = "WEB_ADDRESS";
-    public ArrayList<String> keyArray ;
-    public ArrayList<String> valueArray ;
+
+    private ArrayList<String> keyArray ;
+    private ArrayList<String> valueArray ;
+
+    private Callbacks mCallbacks = (Callbacks) getContext();
+
+    public interface Callbacks{
+
+        void onServiceSelected(String serviceName, String url);
+    }
 
 
     public ContainerServiceAdapter(Context context, ArrayList<String> keyList, ArrayList<String> valueList){
@@ -55,16 +62,8 @@ public class ContainerServiceAdapter extends ArrayAdapter<String> {
                     getContext().startActivity(intent);
                 }
 */
+                mCallbacks.onServiceSelected(keyArray.get(position),valueArray.get(position));
 
-                System.out.println("LOADING WEB FRAGMENT");
-                Fragment fragment = new WebTrackingFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString(WEB_ADDRESS, valueArray.get(position));
-                fragment.setArguments(bundle);
-                FragmentTransaction transaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragment_container, fragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
 
             }
         });
