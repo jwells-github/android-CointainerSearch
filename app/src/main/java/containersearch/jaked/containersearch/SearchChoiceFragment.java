@@ -25,7 +25,7 @@ public class SearchChoiceFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.as, container, false);
+        View v = inflater.inflate(R.layout.fragment_search_choice, container, false);
         mContainerNumber = new ContainerNumber(getArguments().getString(CONTAINER_NUMBER));
         setTreeMap();
 
@@ -38,9 +38,12 @@ public class SearchChoiceFragment extends Fragment {
         //webView.loadUrl(suggestedMap.get(suggestedMap.firstKey()));
         ArrayList<String> suggestedValueArray = new ArrayList<String>(suggestedMap.values());
         ArrayList<String> suggestedKeyArray = new ArrayList<String>(suggestedMap.keySet());
-        final ContainerServiceAdapter suggestedServiceAdapter = new ContainerServiceAdapter(getContext(), suggestedKeyArray, suggestedValueArray);
-        ListView listViewSuggested = v.findViewById(R.id.lvSuggested);
-        listViewSuggested.setAdapter(suggestedServiceAdapter);
+        if(suggestedMap.keySet().size() > 0){
+            final ContainerServiceAdapter suggestedServiceAdapter = new ContainerServiceAdapter(getContext(), suggestedKeyArray, suggestedValueArray);
+            ListView listViewSuggested = v.findViewById(R.id.lvSuggested);
+            listViewSuggested.setAdapter(suggestedServiceAdapter);
+        }
+
 
 
         final ContainerServiceAdapter adapter = new ContainerServiceAdapter(getContext(), keyArray, valueArray);

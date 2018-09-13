@@ -1,6 +1,8 @@
 package containersearch.jaked.containersearch;
 
 import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -26,6 +28,31 @@ public class ContainerSearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fragment);
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                item.setChecked(true);
+                mDrawerLayout.closeDrawers();
+
+                switch (item.getItemId()){
+                    case R.id.drawer_tracked_containers:
+
+                        break;
+                    case R.id.drawer_history:
+
+                        break;
+                    case R.id.drawer_options:
+
+                        break;
+                    case R.id.drawer_about:
+
+                        break;
+                }
+                return true;
+            }
+        });
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

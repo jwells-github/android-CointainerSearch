@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group>
         <item
-            android:title="History"
-            />
+            android:id="@+id/drawer_tracked_containers"
+            android:title="@string/tracked_containers" />
         <item
-            android:title="Tracked Containers"
-            />
+            android:id="@+id/drawer_history"
+            android:title="@string/history" />
         <item
-            android:title="Options"
-            />
+            android:id="@+id/drawer_options"
+            android:title="@string/options" />
         <item
-            android:title="About"
-            />
-    </group>
+            android:id="@+id/drawer_about"
+            android:title="@string/about" />
+
 
 </menu>

@@ -10,6 +10,11 @@ import android.webkit.ValueCallback;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import java.util.ArrayList;
+
+import containersearch.jaked.containersearch.database.DatabaseReader;
+import containersearch.jaked.containersearch.database.RecordSaver;
+
 public class WebTrackingFragment extends Fragment {
 
 
@@ -44,8 +49,6 @@ public class WebTrackingFragment extends Fragment {
                 }
 
 
-
-
             }
         });
         webView.getSettings().setJavaScriptEnabled(true);
@@ -58,6 +61,14 @@ public class WebTrackingFragment extends Fragment {
         webView.getSettings().setDomStorageEnabled(true);
         webView.loadUrl(mURL);
 
+        RecordSaver recordSaver = new RecordSaver();
+        recordSaver.addRecord(mContainerNumber,mServiceName, getContext());
+        DatabaseReader databaseReader = new DatabaseReader();
+        ArrayList<String[]> searches = databaseReader.DatabaseReader(getContext());
+
+        for (String[] s : searches){
+            System.out.println("Container number " + s[0] + " service " + s[1] + " date " + s[2] );
+        }
         return v;
     }
 

@@ -5,10 +5,16 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 
 public class SearchChoiceActivity extends AppCompatActivity  implements  ContainerServiceAdapter.Callbacks  {
+
 
     private static final String CONTAINER_NUMBER = "CONTAINER_NUMBER";
     private static final String WEB_ADDRESS = "WEB_ADDRESS";
@@ -18,14 +24,13 @@ public class SearchChoiceActivity extends AppCompatActivity  implements  Contain
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_fragment);
 
         Intent intent = getIntent();
         Bundle bundle = new Bundle();
         containerNumber = intent.getStringExtra(CONTAINER_NUMBER);
         bundle.putString(CONTAINER_NUMBER, containerNumber);
 
-        setContentView(R.layout.activity_fragment);
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         SearchChoiceFragment searchChoiceFragment = new SearchChoiceFragment();
@@ -47,5 +52,6 @@ public class SearchChoiceActivity extends AppCompatActivity  implements  Contain
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
 
 }

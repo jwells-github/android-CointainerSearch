@@ -1,4 +1,8 @@
 <resources>
-    <string name="app_name">ContainerSearch</string>
+    <string name="app_name">Container Search</string>
     <string name="sugested_services">Sugested Services</string>
+    <string name="tracked_containers">Tracked Containers</string>
+    <string name="history">History</string>
+    <string name="options">Options</string>
+    <string name="about">About</string>
 </resources>
