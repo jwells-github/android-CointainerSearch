@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -29,19 +30,28 @@ public class ContainerSearchActivity extends AppCompatActivity {
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
 
+
+
         NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.bringToFront();
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                item.setChecked(true);
-                mDrawerLayout.closeDrawers();
-
+            public boolean onNavigationItemSelected(MenuItem item) {
+                System.out.println("History pressed");
                 switch (item.getItemId()){
+
                     case R.id.drawer_tracked_containers:
 
                         break;
                     case R.id.drawer_history:
+                        item.setChecked(true);
+                        System.out.println("History pressed");
 
+                        Fragment fragment = new SearchHistoryFragment();
+                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.fragment_container, fragment);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
                         break;
                     case R.id.drawer_options:
 
@@ -50,6 +60,7 @@ public class ContainerSearchActivity extends AppCompatActivity {
 
                         break;
                 }
+                 mDrawerLayout.closeDrawers();
                 return true;
             }
         });
@@ -67,6 +78,7 @@ public class ContainerSearchActivity extends AppCompatActivity {
         fragmentTransaction.add(R.id.fragment_container, containerSearchFragment).commit();
 
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

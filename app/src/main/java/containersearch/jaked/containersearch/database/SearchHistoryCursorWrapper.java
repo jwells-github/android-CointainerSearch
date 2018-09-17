@@ -13,7 +13,7 @@ public class SearchHistoryCursorWrapper extends CursorWrapper {
 
 
     public String[] getContainerSearch(){
-        String containerNumber = getString(getColumnIndex(SearchHistoryTable.Cols.DATE));
+        String containerNumber = getString(getColumnIndex(SearchHistoryTable.Cols.CONTAINER_NUMBER));
         String searchServuce = getString(getColumnIndex(SearchHistoryTable.Cols.SERVICE));
         String searchDate = getString(getColumnIndex(SearchHistoryTable.Cols.DATE));
 

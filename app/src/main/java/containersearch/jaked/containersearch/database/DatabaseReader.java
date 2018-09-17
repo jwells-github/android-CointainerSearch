@@ -17,21 +17,21 @@ public class DatabaseReader {
 
     public ArrayList<String[]> DatabaseReader(Context context){
         mDatabase = new SearchHistoryHelper(context).getWritableDatabase();
-        ArrayList<String[]> albums = new ArrayList<String[]>();
+        ArrayList<String[]> searches = new ArrayList<String[]>();
 
         SearchHistoryCursorWrapper cursorWrapper = queryAlbums(null,null);
 
         try{
             cursorWrapper.moveToFirst();
             while (!cursorWrapper.isAfterLast()){
-                albums.add(cursorWrapper.getContainerSearch());
+                searches.add(cursorWrapper.getContainerSearch());
                 cursorWrapper.moveToNext();
             }
         }
         finally {
             cursorWrapper.close();
         }
-        return albums;
+        return searches;
     }
 
     private SearchHistoryCursorWrapper queryAlbums(String whereClause,

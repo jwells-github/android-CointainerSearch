@@ -51,8 +51,6 @@ public class SearchChoiceFragment extends Fragment {
         listViewAllServices.setAdapter(adapter);
 
 
-
-
         return v;
     }
 

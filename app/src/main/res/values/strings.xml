@@ -2,7 +2,7 @@
     <string name="app_name">Container Search</string>
     <string name="sugested_services">Sugested Services</string>
     <string name="tracked_containers">Tracked Containers</string>
-    <string name="history">History</string>
+    <string name="search_history">Search History</string>
     <string name="options">Options</string>
     <string name="about">About</string>
 </resources>
