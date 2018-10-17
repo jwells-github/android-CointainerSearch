@@ -75,6 +75,54 @@ public class WebTrackingFragment extends Fragment {
                 js  = "document.getElementById('ctl00_ctl00_plcMain_plcMain_TrackSearch_txtBolSearch_TextField').value='"+containerNumber+"';"
                     + "document.getElementById('ctl00_ctl00_plcMain_plcMain_TrackSearch_hlkSearch').click();";
                 break;
+            case "ACL":
+                js = "document.getElementsByName('search_for')[0].value='"+containerNumber+"';";
+                break;
+            case "Alianca":
+                // Services prevents scripting
+                break;
+            case "Beacon Intermodal":
+                js  = "document.getElementById('txtLookupConId').value='"+containerNumber+"';"
+                    + "document.getElementById('btnPublicLookup').click();";
+                break;
+            case "BMC Line":
+                js  = "document.getElementById('container').value='"+containerNumber+"';";
+                break;
+            case "Bridgehead":
+                js  = "document.getElementById('contNO').value='"+containerNumber+"';";
+                break;
+            case "CONCOR":
+                js  = "document.getElementById('contno').value='"+containerNumber+"';"
+                        + "document.getElementById('CONTButton1').click();";
+                break;
+            case "Crowley":
+                js  = "document.getElementById('i1').value='"+containerNumber+"';";
+                break;
+            case "Dong Young Shipping":
+                js  = "document.getElementById('number1').value='"+containerNumber+"';";
+                break;
+            case "Dongjin Shipping":
+                js = "document.getElementsByName('search_word')[0].value='"+containerNumber+"';";
+                break;
+            case "DP World Nhava Sheva":
+                js = "document.getElementsByName('containerNo')[0].value='"+containerNumber+"';";
+                break;
+            case "Emirates Shipping Line":
+                js  = "document.getElementById('blsearch1').value='"+containerNumber+"';";
+                break;
+            case "Evergreen":
+                js  = "document.getElementById('NO').value='"+containerNumber+"';";
+                break;
+            case "Finnlines":
+                js  = "document.getElementById('ContentPlaceHolder_Main_ASPxPageControl1_TextBox_Shpmt').value='"+containerNumber+"';";
+                break;
+            case "Flexi-Van Leasing":
+                js  = "document.getElementById('ctl00_FvContent_txtUnitInput').value='"+containerNumber+"';"
+                        + "document.getElementById('ctl00_FvContent_btnUnitDetail').click();";
+                break;
+            case "Grimaldi":
+                js  = "document.getElementById('ContentPlaceHolder_Main_ASPxPageControl1_TextBox_Shpmt').value='"+containerNumber+"';";
+                break;
 
         }
         return js;
