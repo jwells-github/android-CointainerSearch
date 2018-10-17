@@ -63,12 +63,8 @@ public class WebTrackingFragment extends Fragment {
 
         RecordSaver recordSaver = new RecordSaver();
         recordSaver.addRecord(mContainerNumber,mServiceName, getContext());
-        DatabaseReader databaseReader = new DatabaseReader();
-        ArrayList<String[]> searches = databaseReader.DatabaseReader(getContext());
 
-        for (String[] s : searches){
-            System.out.println("Container number " + s[0] + " service " + s[1] + " date " + s[2] );
-        }
+
         return v;
     }
 

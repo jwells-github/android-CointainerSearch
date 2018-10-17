@@ -1,8 +1,12 @@
 package containersearch.jaked.containersearch;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +20,11 @@ import containersearch.jaked.containersearch.R;
 public class SearchHistoryAdapter extends ArrayAdapter<String[]> {
 
     private ArrayList<String[]> searchArray;
+
+    private static final String CONTAINER_NUMBER = "CONTAINER_NUMBER";
+    private static final String WEB_ADDRESS = "WEB_ADDRESS";
+    private static final String SERVICE_NAME = "SERVICE_NAME";
+
 
     public SearchHistoryAdapter(Context context, ArrayList<String[]> search){
         super(context, 0, search);
@@ -32,13 +41,44 @@ public class SearchHistoryAdapter extends ArrayAdapter<String[]> {
         }
 
         String[] search = searchArray.get(position);
+
+        final String containerNumber = search[0];
+        final String serviceName = search[1];
+        final String date = search[2];
+
+        ContainerNumber cn = new ContainerNumber(containerNumber);
+        final String url = cn.getServiceMap().get(serviceName);
+
+        System.out.println("SERVICE NAME " + serviceName);
+        System.out.println("URL " + url);
+
         TextView tvContainerNumber = convertView.findViewById(R.id.tvContainerNumber);
         TextView tvServiceName = convertView.findViewById(R.id.tvContainerService);
         TextView tvSearchDate = convertView.findViewById(R.id.tvSearchDate);
 
-        tvContainerNumber.setText(search[0]);
-        tvServiceName.setText(search[1]);
-        tvSearchDate.setText(search[2]);
+        tvContainerNumber.setText(containerNumber);
+        tvServiceName.setText(serviceName);
+        tvSearchDate.setText(date);
+
+
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new WebTrackingFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString(WEB_ADDRESS, url);
+                bundle.putString(SERVICE_NAME, serviceName);
+                bundle.putString(CONTAINER_NUMBER,containerNumber);
+                fragment.setArguments(bundle);
+
+                FragmentTransaction transaction = ((FragmentActivity)getContext()).getSupportFragmentManager().beginTransaction();
+
+                transaction.replace(R.id.fragment_container, fragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
 
         return convertView;
     }

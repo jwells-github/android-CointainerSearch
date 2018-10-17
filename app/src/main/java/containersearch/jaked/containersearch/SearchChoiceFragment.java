@@ -27,7 +27,8 @@ public class SearchChoiceFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_search_choice, container, false);
         mContainerNumber = new ContainerNumber(getArguments().getString(CONTAINER_NUMBER));
-        setTreeMap();
+
+        serviceMap = mContainerNumber.getServiceMap();
 
         ArrayList<String> valueArray = new ArrayList<String>(serviceMap.values());
         ArrayList<String> keyArray = new ArrayList<String>(serviceMap.keySet());

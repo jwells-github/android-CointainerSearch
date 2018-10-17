@@ -27,6 +27,7 @@ public class SearchHistoryFragment extends Fragment {
         SearchHistoryAdapter adapter = new SearchHistoryAdapter(getContext(), historyArray);
         lvSearchHsitory.setAdapter(adapter);
 
+
         return v;
     }
 }

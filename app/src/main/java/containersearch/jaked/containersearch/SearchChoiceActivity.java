@@ -50,7 +50,6 @@ public class SearchChoiceActivity extends AppCompatActivity  implements  Contain
 
                         break;
                     case R.id.drawer_history:
-                        item.setChecked(true);
                         System.out.println("History pressed");
 
                         Fragment fragment = new SearchHistoryFragment();
@@ -76,7 +75,7 @@ public class SearchChoiceActivity extends AppCompatActivity  implements  Contain
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
-        
+
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         SearchChoiceFragment searchChoiceFragment = new SearchChoiceFragment();
