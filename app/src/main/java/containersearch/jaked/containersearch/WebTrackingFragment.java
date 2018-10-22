@@ -123,7 +123,84 @@ public class WebTrackingFragment extends Fragment {
             case "Grimaldi":
                 js  = "document.getElementById('ContentPlaceHolder_Main_ASPxPageControl1_TextBox_Shpmt').value='"+containerNumber+"';";
                 break;
-
+            case "Kambara Kisen":
+                js  = "document.getElementById('searchName').value='"+containerNumber+"';";
+                break;
+            case "KiwiRail":
+                js  = "document.getElementById('container-wagon-number').value='"+containerNumber+"';";
+                break;
+            case "MACS":
+                js  = "document.getElementById('cnumber').value='"+containerNumber+"';"
+                    + "document.getElementById('view').click();";
+                break;
+            case "Marfret":
+                js  = "document.getElementById('suivi_conteneur').value='"+containerNumber+"';";
+                break;
+            case "Matson":
+                js  = "document.getElementById('containerNumber').value='"+containerNumber+"';";
+                break;
+            case "Meratus Line":
+                js  = "document.getElementById('ctl00_ContentPane_TxtFind').value='"+containerNumber+"';";
+                break;
+            case "Namsung":
+                js  = "document.getElementById('cntrNo').value='"+containerNumber+"';";
+                break;
+            case "NileDutch":
+                js  = "document.getElementById('ContainerNumber').value='"+containerNumber+"';"
+                        + "document.getElementById('advancedTrackingSubmit').click();";
+                break;
+            case "NYK Line":
+            case "ONE":
+                js  = "document.getElementById('searchName').value='"+containerNumber+"';";
+                break;
+            case "Ocean World Lines":
+                js  = "document.getElementById('containernumber').value='"+containerNumber+"';";
+                break;
+            case "Pan Asia Line":
+                js  = "document.getElementById('txtContainerNo').value='"+containerNumber+"';"
+                        + "document.getElementById('cmdShow').click();";
+                break;
+            case "Pan Continental Shipping":
+                js  = "document.getElementById('I_AS_ARGU1').value='"+containerNumber+"';"
+                        + "document.getElementById('WEB_212_INQ').click();";
+                break;
+            case "Pasha Hawaii":
+                js  = "document.getElementById('SearchTerm').value='"+containerNumber+"';";
+                break;
+            case "PSL Navegação":
+                js  = "document.getElementById('refnumbers').value='"+containerNumber+"';"
+                        + "document.getElementById('button').click();";
+                break;
+            case "Sarjak Container Lines":
+                js  = "document.getElementById('txtsearchB').value='"+containerNumber+"';"
+                        + "document.getElementById('ibsearch').click();";
+                break;
+            case "Seaco":
+                js  = "document.getElementById('idTAUnitNo').value='"+containerNumber+"';"
+                        + "document.getElementById('idBtnUnitEnqSubmit').click();";
+                break;
+            case "SeaCube":
+                js  = "document.getElementById('txtLookupConId').value='"+containerNumber+"';"
+                        + "document.getElementById('btnPublicLookup').click();";
+                break;
+            case "T.S. Lines":
+                js  = "document.getElementById('TextBox1').value='"+containerNumber+"';"
+                        + "document.getElementById('Button1').click();";
+                break;
+            case "Textainer":
+                js  = "document.getElementById('ctl00_bodyContent_ucEqpIds_txtEqpId').value='"+containerNumber+"';"
+                        + "document.getElementById('ctl00_bodyContent_btnSubmit').click();";
+                break;
+            case "The China Navigation Company":
+                js  = "document.getElementById('MainContent_txtTackandTrace').value='"+containerNumber+"';"
+                        + "document.getElementById('MainContent_btnTrace').click();";
+                break;
+            case "Touax":
+                js  = "document.getElementById('app_unitenquiry_filter_container_numbers').value='"+containerNumber+"';";
+                break;
+            case "Triton International":
+                js  = "document.getElementById('unitNumbers').value='"+containerNumber+"';";
+                break;
         }
         return js;
     }
