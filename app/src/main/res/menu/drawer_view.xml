@@ -3,7 +3,7 @@
 
         <item
             android:id="@+id/drawer_tracked_containers"
-            android:title="@string/tracked_containers" />
+            android:title="@string/container_search" />
         <item
             android:id="@+id/drawer_history"
             android:title="@string/search_history" />

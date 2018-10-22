@@ -32,20 +32,21 @@ public class ContainerSearchActivity extends AppCompatActivity {
 
 
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        final NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.bringToFront();
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
-                System.out.println("History pressed");
+                for (int i = 0; i < navigationView.getMenu().size(); i++) {
+                    navigationView.getMenu().getItem(i).setChecked(false);
+                }
+                item.setChecked(true);
                 switch (item.getItemId()){
 
                     case R.id.drawer_tracked_containers:
 
                         break;
                     case R.id.drawer_history:
-                        item.setChecked(true);
-                        System.out.println("History pressed");
 
                         Fragment fragment = new SearchHistoryFragment();
                         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
