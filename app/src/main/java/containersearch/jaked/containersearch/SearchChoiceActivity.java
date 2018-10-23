@@ -43,14 +43,11 @@ public class SearchChoiceActivity extends AppCompatActivity  implements  Contain
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
-                System.out.println("History pressed");
                 switch (item.getItemId()){
 
                     case R.id.drawer_container_search:
-
                         break;
                     case R.id.drawer_history:
-                        System.out.println("History pressed");
 
                         Fragment fragment = new SearchHistoryFragment();
                         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

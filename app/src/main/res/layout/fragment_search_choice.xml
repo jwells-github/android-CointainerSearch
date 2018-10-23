@@ -4,12 +4,14 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tvSuggestedServices"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/suggested_services"
+        android:textAlignment="center"
         android:textColor="@android:color/black"
-        android:textSize="24sp" />
+        android:textSize="36sp"
+        android:visibility="gone" />
 
 
 
@@ -22,8 +24,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/all_services"
+        android:textAlignment="center"
         android:textColor="@android:color/black"
-        android:textSize="24sp" />
+        android:textSize="36sp"
+        android:background=""/>
 
     <ListView
         android:id="@+id/lvAll"

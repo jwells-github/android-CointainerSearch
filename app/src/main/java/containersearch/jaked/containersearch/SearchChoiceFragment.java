@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.TreeMap;
@@ -43,6 +44,10 @@ public class SearchChoiceFragment extends Fragment {
             final ContainerServiceAdapter suggestedServiceAdapter = new ContainerServiceAdapter(getContext(), suggestedKeyArray, suggestedValueArray);
             ListView listViewSuggested = v.findViewById(R.id.lvSuggested);
             listViewSuggested.setAdapter(suggestedServiceAdapter);
+
+            TextView listTitle = v.findViewById(R.id.tvSuggestedServices);
+            listTitle.setVisibility(View.VISIBLE);
+
         }
 
 
