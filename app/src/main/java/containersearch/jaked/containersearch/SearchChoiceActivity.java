@@ -46,7 +46,7 @@ public class SearchChoiceActivity extends AppCompatActivity  implements  Contain
                 System.out.println("History pressed");
                 switch (item.getItemId()){
 
-                    case R.id.drawer_tracked_containers:
+                    case R.id.drawer_container_search:
 
                         break;
                     case R.id.drawer_history:

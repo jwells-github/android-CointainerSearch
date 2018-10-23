@@ -22,6 +22,8 @@ public class ContainerSearchActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
 
+    private String fragmentBackstack = "fragmentBackstack";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,31 +39,40 @@ public class ContainerSearchActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
-                for (int i = 0; i < navigationView.getMenu().size(); i++) {
-                    navigationView.getMenu().getItem(i).setChecked(false);
+                if(item.isChecked()){
+                    return false;
                 }
-                item.setChecked(true);
+
+                Fragment fragment;
+                FragmentManager fm = getSupportFragmentManager();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
                 switch (item.getItemId()){
 
-                    case R.id.drawer_tracked_containers:
-
+                    case R.id.drawer_container_search:
+                        fm.popBackStack();
                         break;
                     case R.id.drawer_history:
-
-                        Fragment fragment = new SearchHistoryFragment();
-                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                        fragment = new SearchHistoryFragment();
                         transaction.replace(R.id.fragment_container, fragment);
-                        transaction.addToBackStack(null);
+                        transaction.addToBackStack(fragmentBackstack);
                         transaction.commit();
                         break;
                     case R.id.drawer_options:
 
                         break;
                     case R.id.drawer_about:
-
+                        fragment = new AboutPageFragment();
+                        transaction.replace(R.id.fragment_container, fragment);
+                        transaction.addToBackStack(fragmentBackstack);
+                        transaction.commit();
                         break;
                 }
+                for (int i = 0; i < navigationView.getMenu().size(); i++) {
+                    navigationView.getMenu().getItem(i).setChecked(false);
+                }
                  mDrawerLayout.closeDrawers();
+                item.setChecked(true);
                 return true;
             }
         });
@@ -79,6 +90,7 @@ public class ContainerSearchActivity extends AppCompatActivity {
         fragmentTransaction.add(R.id.fragment_container, containerSearchFragment).commit();
 
     }
+
 
 
     @Override

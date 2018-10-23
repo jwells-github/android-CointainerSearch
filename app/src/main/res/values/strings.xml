@@ -2,9 +2,11 @@
     <string name="app_name">Container Search</string>
     <string name="search">Search</string>
     <string name="container_number_prompt">Search for a \n Container Number</string>
-    <string name="sugested_services">Sugested Services</string>
+    <string name="suggested_services">Suggested Services</string>
+    <string name="all_services">All Services</string>
     <string name="container_search">Container Search</string>
     <string name="search_history">Search History</string>
     <string name="options">Options</string>
     <string name="about">About</string>
+    <string name="about_page_text">Created by Jake Wells \n Using Android Studio</string>
 </resources>
