@@ -21,8 +21,8 @@ import android.webkit.WebViewClient;
 public class ContainerSearchActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
+    private Boolean fragmentOnStack = false;
 
-    private String fragmentBackstack = "fragmentBackstack";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +31,6 @@ public class ContainerSearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fragment);
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
-
-
-
         final NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.bringToFront();
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -43,7 +40,7 @@ public class ContainerSearchActivity extends AppCompatActivity {
                     return false;
                 }
 
-                Fragment fragment;
+                Fragment fragment = null;
                 FragmentManager fm = getSupportFragmentManager();
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
@@ -51,23 +48,33 @@ public class ContainerSearchActivity extends AppCompatActivity {
 
                     case R.id.drawer_container_search:
                         fm.popBackStack();
+                        fragmentOnStack = false;
                         break;
                     case R.id.drawer_history:
                         fragment = new SearchHistoryFragment();
-                        transaction.replace(R.id.fragment_container, fragment);
-                        transaction.addToBackStack(fragmentBackstack);
-                        transaction.commit();
+
                         break;
                     case R.id.drawer_options:
 
                         break;
                     case R.id.drawer_about:
                         fragment = new AboutPageFragment();
-                        transaction.replace(R.id.fragment_container, fragment);
-                        transaction.addToBackStack(fragmentBackstack);
-                        transaction.commit();
                         break;
                 }
+                if (fragment != null){
+                    transaction.replace(R.id.fragment_container, fragment);
+                    if(!fragmentOnStack){
+                        transaction.addToBackStack(null);
+                        fragmentOnStack = true;
+                    }
+                    else{
+                        fm.popBackStack();
+                        transaction.addToBackStack(null);
+                    }
+
+                    transaction.commit();
+                }
+
                 for (int i = 0; i < navigationView.getMenu().size(); i++) {
                     navigationView.getMenu().getItem(i).setChecked(false);
                 }
@@ -91,7 +98,15 @@ public class ContainerSearchActivity extends AppCompatActivity {
 
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        final NavigationView navigationView = findViewById(R.id.nav_view);
+        for (int i = 0; i < navigationView.getMenu().size(); i++) {
+            navigationView.getMenu().getItem(i).setChecked(false);
+        }
+        navigationView.getMenu().getItem(0).setChecked(true);
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -106,35 +121,3 @@ public class ContainerSearchActivity extends AppCompatActivity {
 
 }
 
-/*
-
-    setContentView(R.layout.fragment_webview);
-    final WebView mWebview = (WebView) findViewById(R.id.webView);
-        System.out.println("VALUE OF a "  + (int) 'a');
-                System.out.println("VALUE OF c "  + (int) 'c');
-
-                ContainerNumber containerNumber = new ContainerNumber("HMCU1090544");
-                System.out.println(containerNumber.isValid());
-                mWebview.getSettings().setJavaScriptEnabled(true);
-                mWebview.loadUrl("https://www.hmm21.com/cms/business/ebiz/trackTrace/trackTrace/index.jsp?numbers=&numbers=&numbers=&numbers=&numbers=&numbers=&numbers=&numbers=&numbers=&numbers=&numbers=&numbers=&numbers=&is_quick=Y&quick_params=&type=2&number=HDMU5584547&submit.x=21&submit.y=10");
-                mWebview.setFindListener(new WebView.FindListener() {
-@Override
-public void onFindResultReceived(int i, int i1, boolean b) {
-        if(b){
-        System.out.println("Matches " + i1);
-        if(i1 > 0){
-        mWebview.setVisibility(View.VISIBLE);
-        }
-        }
-
-        }
-        });
-
-        ;
-        mWebview.setWebViewClient(new WebViewClient(){
-@Override
-public void onPageFinished(WebView view, String url) {
-        super.onPageFinished(view, url);
-        view.findAllAsync("Tracking Results");
-        }
-        });*/
