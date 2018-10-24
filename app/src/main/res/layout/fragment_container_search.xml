@@ -25,11 +25,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Button"
+        android:padding="12dp"
+        android:text="@string/search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etContainerNumber"
-        tools:text="@string/search" />
+        app:layout_constraintTop_toBottomOf="@+id/etContainerNumber" />
 
     <EditText
         android:id="@+id/etContainerNumber"
@@ -40,6 +40,8 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="CSQU3054383"
+        android:textAlignment="center"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="49dp"
         android:layout_marginTop="32dp"
-        android:text="TextView"
+        android:text="@string/invalid_container_number"
         android:textAlignment="center"
         android:textColor="@android:color/holo_red_light"
         android:textSize="18sp"

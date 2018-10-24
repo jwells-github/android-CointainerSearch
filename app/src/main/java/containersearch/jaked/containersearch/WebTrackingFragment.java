@@ -26,11 +26,12 @@ public class WebTrackingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_webview, container, false);
-        String mURL = getArguments().getString(WEB_ADDRESS);
-        String mServiceName = getArguments().getString(SERVICE_NAME);
-        String mContainerNumber = getArguments().getString(CONTAINER_NUMBER);
+        String URL = getArguments().getString(WEB_ADDRESS);
+        String ServiceName = getArguments().getString(SERVICE_NAME);
+        String ContainerNumber = getArguments().getString(CONTAINER_NUMBER);
+
         WebView webView = v.findViewById(R.id.webView);
-        final String js = determineService(mContainerNumber, mServiceName);
+        final String js = determineService(ContainerNumber, ServiceName);
         webView.setWebViewClient(new WebViewClient(){
 
             boolean b = true;
@@ -59,12 +60,12 @@ public class WebTrackingFragment extends Fragment {
         webView.getSettings().setUseWideViewPort(true);
         // for javascript
         webView.getSettings().setDomStorageEnabled(true);
-        webView.loadUrl(mURL);
+        webView.loadUrl(URL);
 
         RecordSaver recordSaver = new RecordSaver();
-        recordSaver.addRecord(mContainerNumber,mServiceName, getContext());
+        recordSaver.addRecord(ContainerNumber,ServiceName, getContext());
 
-
+        getActivity().setTitle(ServiceName);
         return v;
     }
 
