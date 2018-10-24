@@ -45,4 +45,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.41000003" />
+
+    <TextView
+        android:id="@+id/tvInvalidContainerPrompt"
+        android:layout_width="wrap_content"
+        android:layout_height="49dp"
+        android:layout_marginTop="32dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btSubmit"
+        tools:text="@string/invalid_container_number" />
 </android.support.constraint.ConstraintLayout>
