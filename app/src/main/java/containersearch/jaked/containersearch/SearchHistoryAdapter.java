@@ -43,8 +43,13 @@ public class SearchHistoryAdapter extends ArrayAdapter<String[]> {
         String[] search = searchArray.get(position);
 
         final String containerNumber = search[0];
-        final String serviceName = search[1];
+        final String serviceName = "Service: " +search[1];
         final String date = search[2];
+        String year = date.substring(30);
+        String month = date.substring(4,7);
+        String day = date.substring(8,10);
+        String time = date.substring(11,19);
+        final String formattedDate = month + " " + day + " " + year + " at " + time;
 
         ContainerNumber cn = new ContainerNumber(containerNumber);
         final String url = cn.getServiceMap().get(serviceName);
@@ -58,7 +63,7 @@ public class SearchHistoryAdapter extends ArrayAdapter<String[]> {
 
         tvContainerNumber.setText(containerNumber);
         tvServiceName.setText(serviceName);
-        tvSearchDate.setText(date);
+        tvSearchDate.setText(formattedDate);
 
 
 
