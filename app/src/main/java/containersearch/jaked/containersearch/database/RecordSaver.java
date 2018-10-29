@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.sql.Date;
 import java.util.Calendar;
 
 import containersearch.jaked.containersearch.database.SearchHistoryDatebaseSchema.SearchHistoryTable;
@@ -19,8 +20,12 @@ public class RecordSaver {
         values.put(SearchHistoryTable.Cols.CONTAINER_NUMBER, containerNumber);
         values.put(SearchHistoryTable.Cols.SERVICE, serviceName);
         values.put(SearchHistoryTable.Cols.DATE, Calendar.getInstance().getTime().toString());
-
         database.insert(SearchHistoryTable.NAME, null, values);
+    }
+
+    public void clearDatabase(Context context){
+        SQLiteDatabase database = new SearchHistoryHelper(context).getWritableDatabase();
+        database.delete(SearchHistoryTable.NAME,null,null);
     }
 
 

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -13,16 +14,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class ContainerServiceAdapter extends ArrayAdapter<String> {
+public class ContainerServiceAdapter extends ArrayAdapter<String> implements Filterable {
 
 
+    private ArrayList<String> filteredKeyArray;
+    private ArrayList<String> filteredValueArray;
 
-    private ArrayList<String> keyArray ;
-    private ArrayList<String> valueArray ;
+    private ArrayList<String> allKeyArray;
+    private ArrayList<String> allValueArray;
+
+    private ServiceFilter mServiceFilter;
 
     private Callbacks mCallbacks = (Callbacks) getContext();
 
@@ -34,8 +41,12 @@ public class ContainerServiceAdapter extends ArrayAdapter<String> {
 
     public ContainerServiceAdapter(Context context, ArrayList<String> keyList, ArrayList<String> valueList){
         super(context,0,keyList);
-        keyArray = keyList;
-        valueArray = valueList;
+        allKeyArray = keyList;
+        allValueArray = valueList;
+        filteredKeyArray = keyList;
+        filteredValueArray = valueList;
+
+        getFilter();
     }
 
     @Override
@@ -48,13 +59,11 @@ public class ContainerServiceAdapter extends ArrayAdapter<String> {
 
         TextView tvName = (TextView) convertView.findViewById(R.id.tvName);
 
-        tvName.setText(keyArray.get(position));
+        tvName.setText(filteredKeyArray.get(position));
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("Clicked " + position + " and " + keyArray.get(position));
-
 /*
                 Uri webpage = Uri.parse(valueArray.get(position));
                 Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
@@ -62,7 +71,7 @@ public class ContainerServiceAdapter extends ArrayAdapter<String> {
                     getContext().startActivity(intent);
                 }
 */
-                mCallbacks.onServiceSelected(keyArray.get(position),valueArray.get(position));
+                mCallbacks.onServiceSelected(filteredKeyArray.get(position),filteredValueArray.get(position));
 
 
             }
@@ -73,4 +82,51 @@ public class ContainerServiceAdapter extends ArrayAdapter<String> {
 
     }
 
+    @Override
+    public int getCount() {
+        return filteredValueArray.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        mServiceFilter = new ServiceFilter();
+        return mServiceFilter;
+    }
+
+
+    private class ServiceFilter extends Filter{
+
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            FilterResults filterResults = new FilterResults();
+            if(charSequence!= null && charSequence.length() > 0){
+                ArrayList<String> tempKeyArray = new ArrayList<String>();
+                ArrayList<String> tempValueArray = new ArrayList<String>();
+
+                for(int i =0; i < allKeyArray.size(); i++){
+                    if(allKeyArray.get(i).toLowerCase().contains(charSequence.toString().toLowerCase())){
+                        tempKeyArray.add(allKeyArray.get(i));
+                        tempValueArray.add(allValueArray.get(i));
+                    }
+                }
+                filterResults.count = tempKeyArray.size();
+                filterResults.values = tempKeyArray;
+                filteredValueArray = tempValueArray;
+            }
+            else{
+                filterResults.count = allKeyArray.size();
+                filterResults.values = allKeyArray;
+                filteredValueArray = allValueArray;
+            }
+
+
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            filteredKeyArray = (ArrayList<String>) filterResults.values;
+            notifyDataSetChanged();
+        }
+    }
 }

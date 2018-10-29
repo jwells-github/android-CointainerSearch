@@ -8,6 +8,10 @@
     <string name="container_search">Container Search</string>
     <string name="search_history">Search History</string>
     <string name="options">Options</string>
+    <string name="clear_history">Clear History</string>
+    <string name="clear_history_prompt">This will erase your entire search history \n This cannot be undone</string>
+    <string name="clear_history_erase_all">Erase All</string>
+    <string name="clear_history_cancel">Cancel</string>
     <string name="about">About</string>
     <string name="about_page_text">Created by Jake Wells \n Using Android Studio</string>
 </resources>

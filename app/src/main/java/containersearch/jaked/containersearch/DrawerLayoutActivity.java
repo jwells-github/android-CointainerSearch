@@ -49,10 +49,10 @@ public class DrawerLayoutActivity extends AppCompatActivity {
 
                         break;
                     case R.id.drawer_options:
-
+                        fragment = new OptionsFragment();
                         break;
                     case R.id.drawer_about:
-                        fragment = new AboutPageFragment();
+                        fragment = new AboutFragment();
                         break;
                 }
                 if (fragment != null){

@@ -3,7 +3,11 @@ package containersearch.jaked.containersearch;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -20,6 +24,8 @@ public class SearchChoiceFragment extends Fragment {
 
     public TreeMap<String, String> serviceMap;
     public TreeMap<String, String> suggestedMap;
+    private SearchView searchView;
+    private ContainerServiceAdapter mContainerServiceAdapter;
 
     private static final String CONTAINER_NUMBER = "CONTAINER_NUMBER";
 
@@ -52,11 +58,11 @@ public class SearchChoiceFragment extends Fragment {
 
 
 
-        final ContainerServiceAdapter adapter = new ContainerServiceAdapter(getContext(), keyArray, valueArray);
+        mContainerServiceAdapter = new ContainerServiceAdapter(getContext(), keyArray, valueArray);
         ListView listViewAllServices = v.findViewById(R.id.lvAll);
-        listViewAllServices.setAdapter(adapter);
+        listViewAllServices.setAdapter(mContainerServiceAdapter);
 
-
+        setHasOptionsMenu(true);
         return v;
     }
 
@@ -250,6 +256,24 @@ public class SearchChoiceFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.fragment_search_choice, menu);
+        MenuItem searchItem = menu.findItem(R.id.menu_item_search);
+        searchView = (SearchView) searchItem.getActionView();
 
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                mContainerServiceAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+    }
 }
