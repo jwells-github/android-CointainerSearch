@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.webkit.ValueCallback;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 
@@ -30,14 +31,17 @@ public class WebTrackingFragment extends Fragment {
         String ServiceName = getArguments().getString(SERVICE_NAME);
         String ContainerNumber = getArguments().getString(CONTAINER_NUMBER);
 
-        WebView webView = v.findViewById(R.id.webView);
+        final ProgressBar progressBar = v.findViewById(R.id.progressBar);
+
+        final WebView webView = v.findViewById(R.id.webView);
         final String js = determineService(ContainerNumber, ServiceName);
         webView.setWebViewClient(new WebViewClient(){
 
             boolean b = true;
             @Override
             public void onPageFinished(WebView view, String url) {
-
+                webView.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.INVISIBLE);
                 super.onPageFinished(view, url);
                 if (b){
                     b = false;
