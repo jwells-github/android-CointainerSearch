@@ -88,13 +88,21 @@ public class DrawerLayoutActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        final NavigationView navigationView = findViewById(R.id.nav_view);
-        for (int i = 0; i < navigationView.getMenu().size(); i++) {
-            navigationView.getMenu().getItem(i).setChecked(false);
+
+
+        if(mDrawerLayout.isDrawerOpen(GravityCompat.START)){
+            mDrawerLayout.closeDrawers();
         }
-        navigationView.getMenu().getItem(0).setChecked(true);
-        setTitle(getResources().getString(R.string.app_name));
+        else{
+            final NavigationView navigationView = findViewById(R.id.nav_view);
+            for (int i = 0; i < navigationView.getMenu().size(); i++) {
+                navigationView.getMenu().getItem(i).setChecked(false);
+            }
+            navigationView.getMenu().getItem(0).setChecked(true);
+            setTitle(getResources().getString(R.string.app_name));
+            super.onBackPressed();
+        }
+
     }
 
     @Override

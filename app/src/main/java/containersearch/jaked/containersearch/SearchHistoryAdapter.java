@@ -45,7 +45,8 @@ public class SearchHistoryAdapter extends ArrayAdapter<String[]> {
         final String containerNumber = search[0];
         final String serviceName = "Service: " +search[1];
          String date = search[2];
-        String year = date.substring(30);
+         System.out.println(date);
+        String year = date.substring(24);
         String month = date.substring(4,7);
         String day = date.substring(8,10);
         String time = date.substring(11,19);
