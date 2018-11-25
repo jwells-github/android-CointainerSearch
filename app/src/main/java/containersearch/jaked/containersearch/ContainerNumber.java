@@ -1,5 +1,8 @@
 package containersearch.jaked.containersearch;
 
+import android.text.TextUtils;
+
+import java.util.Arrays;
 import java.util.TreeMap;
 
 public class ContainerNumber {
@@ -15,27 +18,37 @@ public class ContainerNumber {
     }
 
     public Boolean isValid(){
-        String[] containerNumber = mContainerNumber.split("(?!^)");
+        String[] containerNumberDigits = mContainerNumber.split("(?!^)");
 
-        if(containerNumber.length != 11){
+        if(containerNumberDigits.length < 10){
             return false;
         }
 
         for(int i = 0; i <= 3; i++){
-            if(!Character.isLetter(containerNumber[i].charAt(0))){
+            if(!Character.isLetter(containerNumberDigits[i].charAt(0))){
                 return false;
             }
         }
 
         for(int i = 4; i <= 9; i++){
-            if(!Character.isDigit(containerNumber[i].charAt(0))){
+            if(!Character.isDigit(containerNumberDigits[i].charAt(0))){
                 return false;
             }
         }
 
-        int finalDigit = sumOfNumbers(containerNumber) % 11;
+        int finalDigit = sumOfNumbers(containerNumberDigits) % 11;
 
-        if(containerNumber[10].equals(String.valueOf(finalDigit))){
+        if(containerNumberDigits.length == 10){
+           containerNumberDigits = Arrays.copyOf(containerNumberDigits, containerNumberDigits.length+1);
+           containerNumberDigits[10] = String.valueOf(finalDigit);
+           StringBuilder builder = new StringBuilder();
+           for(String value : containerNumberDigits){
+               builder.append(value);
+           }
+           mContainerNumber = builder.toString();
+        }
+
+        if(containerNumberDigits[10].equals(String.valueOf(finalDigit))){
             return true;
         }
         else{
@@ -65,7 +78,7 @@ public class ContainerNumber {
         }
     }
 
-    public TreeMap<String, String> getServiceMap(){
+    public TreeMap<String, String> getServiceMap()  {
 
         return new TreeMap<String, String>() {{
             put("ACL", "https://www.aclcargo.com/trackCargo.php");
