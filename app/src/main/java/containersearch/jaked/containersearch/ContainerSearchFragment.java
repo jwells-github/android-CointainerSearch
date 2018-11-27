@@ -51,6 +51,8 @@ public class ContainerSearchFragment extends Fragment {
             public void onClick(View view) {
 
                 ContainerNumber containerNumber = new ContainerNumber(etContainerNumber.getText().toString());
+                // Only search if the container number is valid, or if the user has been notified
+                // That their container number is invalid
                 if(containerNumber.isValid() || mTrackAnyway ){
                     mTrackAnyway = false;
                     tvInvalidContainerPrompt.setVisibility(View.INVISIBLE);
@@ -66,8 +68,8 @@ public class ContainerSearchFragment extends Fragment {
         return v;
     }
 
+    // Add Fragment containing list of container services
     private void DisplaySearchOptions(String containerNumber){
-
         Intent intent = new Intent(getActivity(), SearchChoiceActivity.class);
         intent.putExtra(CONTAINER_NUMBER, containerNumber);
         startActivity(intent);

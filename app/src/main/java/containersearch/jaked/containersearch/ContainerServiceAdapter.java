@@ -21,20 +21,15 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class ContainerServiceAdapter extends ArrayAdapter<String> implements Filterable {
-
-
     private ArrayList<String> filteredKeyArray;
     private ArrayList<String> filteredValueArray;
-
     private ArrayList<String> allKeyArray;
     private ArrayList<String> allValueArray;
-
     private ServiceFilter mServiceFilter;
-
     private Callbacks mCallbacks = (Callbacks) getContext();
 
-    public interface Callbacks{
 
+    public interface Callbacks{
         void onServiceSelected(String serviceName, String url);
     }
 
@@ -94,6 +89,7 @@ public class ContainerServiceAdapter extends ArrayAdapter<String> implements Fil
     }
 
 
+    // Filters listview based on user search terms
     private class ServiceFilter extends Filter{
 
         @Override

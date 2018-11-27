@@ -17,30 +17,34 @@ public class ContainerNumber {
         return mContainerNumber;
     }
 
+    // Checker whether the container number is in a valid format
     public Boolean isValid(){
         String[] containerNumberDigits = mContainerNumber.split("(?!^)");
-
+        // Too short to generate a check sum
         if(containerNumberDigits.length < 10){
             return false;
         }
 
+        // Check that the first four characters are letters
         for(int i = 0; i <= 3; i++){
             if(!Character.isLetter(containerNumberDigits[i].charAt(0))){
                 return false;
             }
         }
-
+        // Check that the remaining characters are numbers
         for(int i = 4; i <= 9; i++){
             if(!Character.isDigit(containerNumberDigits[i].charAt(0))){
                 return false;
             }
         }
 
-        int finalDigit = sumOfNumbers(containerNumberDigits) % 11;
 
+        int checkSum = sumOfNumbers(containerNumberDigits) % 11;
+
+        // If the user did not provide a check sum, append the generated one to the container number
         if(containerNumberDigits.length == 10){
            containerNumberDigits = Arrays.copyOf(containerNumberDigits, containerNumberDigits.length+1);
-           containerNumberDigits[10] = String.valueOf(finalDigit);
+           containerNumberDigits[10] = String.valueOf(checkSum);
            StringBuilder builder = new StringBuilder();
            for(String value : containerNumberDigits){
                builder.append(value);
@@ -48,7 +52,9 @@ public class ContainerNumber {
            mContainerNumber = builder.toString();
         }
 
-        if(containerNumberDigits[10].equals(String.valueOf(finalDigit))){
+
+        // Check that the checksum of the container number is correct
+        if(containerNumberDigits[10].equals(String.valueOf(checkSum))){
             return true;
         }
         else{
@@ -78,6 +84,7 @@ public class ContainerNumber {
         }
     }
 
+    // A Treemap of all container tracking services
     public TreeMap<String, String> getServiceMap()  {
 
         return new TreeMap<String, String>() {{

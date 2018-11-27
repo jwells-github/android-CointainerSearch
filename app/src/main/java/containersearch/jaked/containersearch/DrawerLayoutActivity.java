@@ -30,6 +30,7 @@ public class DrawerLayoutActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
+                // Do nothing if already on chosen option
                 if(item.isChecked()){
                     return false;
                 }
